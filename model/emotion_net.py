@@ -1,10 +1,9 @@
 import torch.nn as nn
-import torch.functional as f
 
 class EmotionCNN(nn.Module):
 
     # chosen model architecture
-    architecture = [32, 32, 'M', 64, 64, 'M', 128, 128, 'M']
+    architecture = [32, 32, 'pool', 64, 64, 'pool', 128, 128, 'pool']
 
     # todo: if slow convergence/overfit try ELU activation.
 
@@ -22,11 +21,10 @@ class EmotionCNN(nn.Module):
         """
         The code below is executed for every layer in the network
         :param x: Input to the layer
-        :return: Output from the layer
+        :return: Output scores from the layer
         """
         output = self.features(x)
         output = output.view(output.size(0), -1)
-        output = f.dropout(output, p=0.5, training=True)
 
         output = self.classifier(output)  # pass through each layer
 
@@ -35,13 +33,13 @@ class EmotionCNN(nn.Module):
     def create_layers(self, in_channels):
         """
         :param in_channels: number of input channels (always 1 in our case, but we use this argument for modularity)
-        :return: A Sequential container of layers (torch.nn Modules)
+        :return: A Sequential container of layers (torch layer Modules)
         """
 
         layers = list()
 
         for x in self.architecture:
-            if x == 'M':
+            if x == 'pool':
                 layers += [nn.MaxPool2d(kernel_size=2, stride=2)]
             else:
                 layers += [
