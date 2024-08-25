@@ -1,5 +1,5 @@
 import torch.nn as nn
-import torch.functional as F
+import torch.functional as f
 
 class EmotionCNN(nn.Module):
 
@@ -26,7 +26,7 @@ class EmotionCNN(nn.Module):
         """
         output = self.features(x)
         output = output.view(output.size(0), -1)
-        output = F.dropout(output, p=0.5, training=True)
+        output = f.dropout(output, p=0.5, training=True)
 
         output = self.classifier(output)  # pass through each layer
 

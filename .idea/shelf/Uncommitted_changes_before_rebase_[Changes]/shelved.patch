@@ -1,0 +1,34 @@
+Index: model/emotion_net.py
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>import torch.nn as nn\r\nimport torch.functional as F\r\n\r\nclass EmotionCNN(nn.Module):\r\n\r\n    # chosen model architecture\r\n    architecture = [32, 32, 'M', 64, 64, 'M', 128, 128, 'M']\r\n\r\n    # todo: if slow convergence/overfit try ELU activation.\r\n\r\n    def __init__(self, num_of_channels=1, num_of_classes=7):\r\n        super(EmotionCNN, self).__init__()\r\n        self.features = self.create_layers(num_of_channels)\r\n        self.classifier = nn.Sequential(\r\n                                        nn.Linear(6 * 6 * 128, 64),\r\n                                        nn.ReLU(inplace=True),\r\n                                        nn.Dropout(p=0.5),\r\n                                        nn.Linear(64, num_of_classes)\r\n                                        )\r\n\r\n    def forward(self, x):\r\n        \"\"\"\r\n        The code below is executed for every layer in the network\r\n        :param x: Input to the layer\r\n        :return: Output from the layer\r\n        \"\"\"\r\n        output = self.features(x)\r\n        output = output.view(output.size(0), -1)\r\n        output = F.dropout(output, p=0.5, training=True)\r\n\r\n        output = self.classifier(output)  # pass through each layer\r\n\r\n        return output\r\n\r\n    def create_layers(self, in_channels):\r\n        \"\"\"\r\n        :param in_channels: number of input channels (always 1 in our case, but we use this argument for modularity)\r\n        :return: A Sequential container of layers (torch.nn Modules)\r\n        \"\"\"\r\n\r\n        layers = list()\r\n\r\n        for x in self.architecture:\r\n            if x == 'M':\r\n                layers += [nn.MaxPool2d(kernel_size=2, stride=2)]\r\n            else:\r\n                layers += [\r\n                           nn.Conv2d(in_channels, x, kernel_size=3, padding=1),\r\n                           nn.BatchNorm2d(x),\r\n                           nn.ReLU(inplace=True)\r\n                          ]\r\n\r\n                in_channels = x\r\n\r\n        return nn.Sequential(*layers)\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/model/emotion_net.py b/model/emotion_net.py
+--- a/model/emotion_net.py	(revision 188d30b1d28c44ed45459dc31532a17e3ff46b26)
++++ b/model/emotion_net.py	(date 1724579514999)
+@@ -1,7 +1,8 @@
+ import torch.nn as nn
+-import torch.functional as F
++import torch.functional as f
+ 
+ class EmotionCNN(nn.Module):
++    pass
+ 
+     # chosen model architecture
+     architecture = [32, 32, 'M', 64, 64, 'M', 128, 128, 'M']
+@@ -26,7 +27,7 @@
+         """
+         output = self.features(x)
+         output = output.view(output.size(0), -1)
+-        output = F.dropout(output, p=0.5, training=True)
++        output = f.dropout(output, p=0.5, training=True)
+ 
+         output = self.classifier(output)  # pass through each layer
+ 
+@@ -53,3 +54,4 @@
+                 in_channels = x
+ 
+         return nn.Sequential(*layers)
++>>>>>>> 47a3ecf (Add initial network model)
