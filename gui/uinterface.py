@@ -54,8 +54,8 @@ class EmpathyApp:
         self.__build_root_grid_unif()
 
         # Graphic design part of the UI
-        self.rootwnd.iconphoto(False, tk.PhotoImage(file="graphics/logo_notransp.png"))
-        img = Image.open("graphics/eyelogo.png")
+        self.rootwnd.iconphoto(False, tk.PhotoImage(file="gui/graphics/logo_notransp.png"))
+        img = Image.open("gui/graphics/eyelogo.png")
         img.thumbnail((220, 220), Image.Resampling.LANCZOS)
         logo = ImageTk.PhotoImage(img, Image.Resampling.LANCZOS)
         title_label = tk.Label(self.rootwnd, image=logo,
@@ -147,7 +147,7 @@ class EmpathyApp:
             self.cap_obj.release()
             self.cap_obj = None
             self.realtime = False
-            self.mediabox.configure(image='')  # Clear the displayed frame
+            self.mediabox.configure(image='')
 
     def disp_media(self):
         if self.cap_obj is not None:
