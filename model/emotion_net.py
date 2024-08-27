@@ -23,10 +23,9 @@ class EmotionCNN(nn.Module):
         :param x: Input to the layer
         :return: Output scores from the layer
         """
-        output = self.features(x)
-        output = output.view(output.size(0), -1)
-
-        output = self.classifier(output)  # pass through each layer
+        output = self.features(x) # pass image through network
+        output = output.view(output.size(0), -1)  # flatten input
+        output = self.classifier(output)  # classify
 
         return output
 

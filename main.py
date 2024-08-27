@@ -1,4 +1,5 @@
-from gui.uinterface import GInterface
+from gui.uinterface import EmpathyApp
 
 if __name__ == '__main__':
-    GInterface().on()
+    app = EmpathyApp()
+    app.on()

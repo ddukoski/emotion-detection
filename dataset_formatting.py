@@ -1,4 +1,6 @@
 import csv
+
+import cv2
 import numpy as np
 import pandas as pd
 
@@ -21,6 +23,7 @@ if __name__ == '__main__':
 
     for sample in full_ds:
         type_use = sample[-1]
+
         if type_use == 'Training':
             train.append(sample)
         elif type_use == 'PrivateTest':
@@ -35,3 +38,4 @@ if __name__ == '__main__':
     training_dataframe.to_csv('datasets/train.csv', index=False)
     priv_test_dataframe.to_csv('datasets/private_test.csv', index=False)
     pub_test_dataframe.to_csv('datasets/public_test.csv', index=False)
+
