@@ -10,7 +10,7 @@ class EmotionCNN(nn.Module):
     def __init__(self, num_of_channels=1, num_of_classes=7):
         super(EmotionCNN, self).__init__()
         self.features = self.create_layers(num_of_channels)
-        # jana commit
+        # jama
         self.classifier = nn.Sequential(
             nn.Linear(6 * 6 * 128, 64),
             nn.ReLU(inplace=True),
