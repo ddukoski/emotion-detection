@@ -5,7 +5,6 @@ from PIL import Image, ImageTk
 
 
 class EmpathyApp:
-
     # Singleton instance (only 1 window interface)
     _instance = None
 
@@ -28,13 +27,13 @@ class EmpathyApp:
         return cls._instance
 
     def __init__(self):
-        self.rootwnd =      None
-        self.media_path =   None
-        self.mediabox =     None
-        self.cap_obj =      None
-        self.uploader =     None
-        self.realtime =     False
-        self.statsbox =     None
+        self.rootwnd = None
+        self.media_path = None
+        self.mediabox = None
+        self.cap_obj = None
+        self.uploader = None
+        self.realtime = False
+        self.statsbox = None
 
         self.fast_validation_photo = self.photo_ext[1]
 
@@ -81,7 +80,7 @@ class EmpathyApp:
         # Grid positions
         title_label.grid(
             row=0, column=0, columnspan=9, pady=10, sticky="nsew"
-                         )
+        )
         stats_title.grid(
             row=0, column=9, columnspan=3, pady=10, sticky="nsew"
         )
@@ -177,3 +176,4 @@ class EmpathyApp:
                 self.mediabox.configure(image='')
                 self.uploader.grid(row=10, column=1)
                 self.camera.grid(row=11, column=1)
+

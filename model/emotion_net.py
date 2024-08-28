@@ -1,7 +1,7 @@
 import torch.nn as nn
 
-class EmotionCNN(nn.Module):
 
+class EmotionCNN(nn.Module):
     # chosen model architecture
     architecture = [32, 32, 'pool', 64, 64, 'pool', 128, 128, 'pool']
 
@@ -10,12 +10,13 @@ class EmotionCNN(nn.Module):
     def __init__(self, num_of_channels=1, num_of_classes=7):
         super(EmotionCNN, self).__init__()
         self.features = self.create_layers(num_of_channels)
+        # jana commit
         self.classifier = nn.Sequential(
-                                        nn.Linear(6 * 6 * 128, 64),
-                                        nn.ReLU(inplace=True),
-                                        nn.Dropout(p=0.5),
-                                        nn.Linear(64, num_of_classes)
-                                        )
+            nn.Linear(6 * 6 * 128, 64),
+            nn.ReLU(inplace=True),
+            nn.Dropout(p=0.5),
+            nn.Linear(64, num_of_classes)
+        )
 
     def forward(self, x):
         """
@@ -23,7 +24,7 @@ class EmotionCNN(nn.Module):
         :param x: Input to the layer
         :return: Output scores from the layer
         """
-        output = self.features(x) # pass image through network
+        output = self.features(x)  # pass image through network
         output = output.view(output.size(0), -1)  # flatten input
         output = self.classifier(output)  # classify
 
@@ -42,10 +43,10 @@ class EmotionCNN(nn.Module):
                 layers += [nn.MaxPool2d(kernel_size=2, stride=2)]
             else:
                 layers += [
-                           nn.Conv2d(in_channels, x, kernel_size=3, padding=1),
-                           nn.BatchNorm2d(x),
-                           nn.ReLU(inplace=True)
-                          ]
+                    nn.Conv2d(in_channels, x, kernel_size=3, padding=1),
+                    nn.BatchNorm2d(x),
+                    nn.ReLU(inplace=True)
+                ]
 
                 in_channels = x
 
