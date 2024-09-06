@@ -2,7 +2,7 @@ import tkinter as tk
 import cv2
 from tkinter import filedialog
 from PIL import Image, ImageTk
-from preprocessing.preprocessing_frames import preprocess, draw_rectangle_around
+from preprocessing.face_detection import detect_face
 
 
 class EmpathyApp:
@@ -157,6 +157,7 @@ class EmpathyApp:
                 flag, frame = True, self.cap_obj
 
             if flag:
+                frame, processed_faces = detect_face(frame)
                 frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
                 # Convert to PIL image and then to ImageTk format (compatibility)
                 img_pil = Image.fromarray(frame)
