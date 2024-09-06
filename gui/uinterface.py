@@ -2,10 +2,10 @@ import tkinter as tk
 import cv2
 from tkinter import filedialog
 from PIL import Image, ImageTk
+from preprocessing.preprocessing_frames import preprocess, draw_rectangle_around
 
 
 class EmpathyApp:
-
     # Singleton instance (only 1 window interface)
     _instance = None
 
@@ -28,13 +28,13 @@ class EmpathyApp:
         return cls._instance
 
     def __init__(self):
-        self.rootwnd =      None
-        self.media_path =   None
-        self.mediabox =     None
-        self.cap_obj =      None
-        self.uploader =     None
-        self.realtime =     False
-        self.statsbox =     None
+        self.rootwnd = None
+        self.media_path = None
+        self.mediabox = None
+        self.cap_obj = None
+        self.uploader = None
+        self.realtime = False
+        self.statsbox = None
 
         self.fast_validation_photo = self.photo_ext[1]
 
@@ -81,7 +81,7 @@ class EmpathyApp:
         # Grid positions
         title_label.grid(
             row=0, column=0, columnspan=9, pady=10, sticky="nsew"
-                         )
+        )
         stats_title.grid(
             row=0, column=9, columnspan=3, pady=10, sticky="nsew"
         )
@@ -158,7 +158,6 @@ class EmpathyApp:
 
             if flag:
                 frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
-
                 # Convert to PIL image and then to ImageTk format (compatibility)
                 img_pil = Image.fromarray(frame)
                 img_pil.thumbnail(self.mat_dim, Image.Resampling.LANCZOS)
