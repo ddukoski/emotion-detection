@@ -158,10 +158,6 @@ class EmpathyApp:
 
             if flag:
                 frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
-                faces = draw_rectangle_around(frame)
-                for face in faces:
-                    preprocessed_face = preprocess(face)
-
                 # Convert to PIL image and then to ImageTk format (compatibility)
                 img_pil = Image.fromarray(frame)
                 img_pil.thumbnail(self.mat_dim, Image.Resampling.LANCZOS)
