@@ -26,7 +26,7 @@ class EmotionCNN(nn.Module):
         """
         output = self.features(x)  # pass image through network
         output = output.view(output.size(0), -1)  # flatten input
-        output = self.classifier(output)  # classify
+        output = self.classifier(output)  # score (classify)
 
         return output
 
