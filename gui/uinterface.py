@@ -1,7 +1,10 @@
 import tkinter as tk
 import cv2
+import torch
+
 from tkinter import filedialog
 from PIL import Image, ImageTk
+from model.emotion_net import EmotionCNN
 from preprocessing.face_detection import detect_face
 
 
@@ -12,6 +15,7 @@ class EmpathyApp:
     mat_dim = (640, 480)
     photo_ext = ("Photo files", "*.jpg;*.jpeg;*.png;*.gif;*.bmp;*.tiff")
     vid_ext = ("Video files", "*.mp4;*.mkv;*.avi;*.mov;*.flv")
+    model = EmotionCNN(num_of_channels=1,num_of_classes=7)
 
     button_style = {
         "padx": 20,
@@ -37,6 +41,10 @@ class EmpathyApp:
         self.statsbox = None
 
         self.fast_validation_photo = self.photo_ext[1]
+
+        self.model.load_state_dict(
+            torch.load('C:\\Users\\david\\PycharmProjects\\emotion-detection\\model\\emotion_cnn.pth'))
+        self.model.eval()
 
         self.__strap()
 

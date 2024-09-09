@@ -6,8 +6,8 @@ def detect_face(frame):
     :param frame: A digital image with a potential human face present
     :return: All detected and preprocessed faces, along with a frame with a drawn rectangle along each human face
     """
-    MIN_NEIGHBOURS = 10
-    SCALE_FACTOR = 1.3
+    MIN_NEIGHBOURS = 9
+    SCALE_FACTOR = 1.25
 
     face_cascade = cv2.CascadeClassifier('preprocessing/haarcascade_frontalface_default.xml')
     # TODO explore skipping frames for less
