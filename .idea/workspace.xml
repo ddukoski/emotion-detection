@@ -4,14 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4b562d2d-0b6c-4b2b-b2d0-7e3ebdc3b15b" name="Changes" comment="Add modular face detection">
-      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/model/training.py" afterDir="false" />
+    <list default="true" id="4b562d2d-0b6c-4b2b-b2d0-7e3ebdc3b15b" name="Changes" comment="Add model face classifier to UI and dummy training">
       <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_rebase_[Changes]/shelved.patch" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/gui/uinterface.py" beforeDir="false" afterPath="$PROJECT_DIR$/gui/uinterface.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/haarcascade_frontalface_default.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/training.py" beforeDir="false" afterPath="$PROJECT_DIR$/model/training.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/preprocessing/face_detection.py" beforeDir="false" afterPath="$PROJECT_DIR$/preprocessing/face_detection.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -46,6 +43,7 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "Python.dataset_formatting.executor": "Run",
+    "Python.emotion_net.executor": "Run",
     "Python.main.executor": "Run",
     "Python.training.executor": "Run",
     "Python.uinterface.executor": "Run",
@@ -76,7 +74,7 @@
       <recent name="C:\Users\david\PycharmProjects\emotion-detection" />
     </key>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Python.main">
     <configuration name="dataset_formatting" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="emotion-detection" />
       <option name="ENV_FILES" value="" />
@@ -177,8 +175,8 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.training" />
         <item itemvalue="Python.main" />
+        <item itemvalue="Python.training" />
         <item itemvalue="Python.dataset_formatting" />
         <item itemvalue="Python.uinterface" />
       </list>
@@ -211,7 +209,7 @@
       <workItem from="1725727835263" duration="1155000" />
       <workItem from="1725810846035" duration="2834000" />
       <workItem from="1725887988576" duration="27000" />
-      <workItem from="1725888045057" duration="5563000" />
+      <workItem from="1725888045057" duration="11135000" />
     </task>
     <task id="LOCAL-00001" summary="Add processed csv datasets">
       <option name="closed" value="true" />
@@ -301,7 +299,15 @@
       <option name="project" value="LOCAL" />
       <updated>1725644584198</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="Add model face classifier to UI and dummy training">
+      <option name="closed" value="true" />
+      <created>1725894019548</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1725894019548</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -327,12 +333,25 @@
     <MESSAGE value="Add UI responsiveness and automatic window configuration" />
     <MESSAGE value="test jama" />
     <MESSAGE value="Add modular face detection" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add modular face detection" />
+    <MESSAGE value="Add model face classifier to UI and dummy training" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add model face classifier to UI and dummy training" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/gui/uinterface.py</url>
+          <line>181</line>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/emotion_detection$training.coverage" NAME="training Coverage Results" MODIFIED="1725892922922" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/model" />
-    <SUITE FILE_PATH="coverage/emotion_detection$main.coverage" NAME="main Coverage Results" MODIFIED="1725893288511" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/emotion_detection$emotion_net.coverage" NAME="emotion_net Coverage Results" MODIFIED="1725894321925" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/model" />
+    <SUITE FILE_PATH="coverage/emotion_detection$training.coverage" NAME="training Coverage Results" MODIFIED="1725896252724" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/model" />
+    <SUITE FILE_PATH="coverage/emotion_detection$main.coverage" NAME="main Coverage Results" MODIFIED="1725899070025" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/emotion_detection$dataset_formatting.coverage" NAME="dataset_formatting Coverage Results" MODIFIED="1725889272207" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/emotion_detection$uinterface.coverage" NAME="uinterface Coverage Results" MODIFIED="1724842194941" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/gui" />
+    <SUITE FILE_PATH="coverage/emotion_detection$uinterface.coverage" NAME="uinterface Coverage Results" MODIFIED="1725895051356" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/gui" />
   </component>
 </project>

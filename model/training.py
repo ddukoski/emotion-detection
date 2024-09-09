@@ -77,7 +77,7 @@ if __name__ == '__main__':
     # Path parameters
     train_csv = "C:\\Users\\david\\PycharmProjects\\emotion-detection\\datasets\\dummytrain.csv"
     test_csv = "C:\\Users\\david\\PycharmProjects\\emotion-detection\\datasets\\dummytest.csv"
-    model_save_path = "C:\\Users\\david\\PycharmProjects\\emotion-detection\\model\\emotion_cnn.pth"
+    model_save_path = "C:\\Users\\david\\PycharmProjects\\emotion-detection\\cnn.pth"
 
     # Hyperparameters
     batch_size = 64

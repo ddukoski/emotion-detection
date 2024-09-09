@@ -2,16 +2,22 @@ import tkinter as tk
 import cv2
 import torch
 
+import torch.nn.functional as F
 from tkinter import filedialog
 from PIL import Image, ImageTk
 from model.emotion_net import EmotionCNN
 from preprocessing.face_detection import detect_face
+from preprocessing.preprocessing_frames import preprocess
+
 
 
 class EmpathyApp:
     # Singleton instance (only 1 window interface)
     _instance = None
+    skip_every = 4
+    skip_ctr = 0
 
+    last_roi_array = None
     mat_dim = (640, 480)
     photo_ext = ("Photo files", "*.jpg;*.jpeg;*.png;*.gif;*.bmp;*.tiff")
     vid_ext = ("Video files", "*.mp4;*.mkv;*.avi;*.mov;*.flv")
@@ -43,7 +49,7 @@ class EmpathyApp:
         self.fast_validation_photo = self.photo_ext[1]
 
         self.model.load_state_dict(
-            torch.load('C:\\Users\\david\\PycharmProjects\\emotion-detection\\model\\emotion_cnn.pth'))
+            torch.load('C:\\Users\\david\\PycharmProjects\\emotion-detection\\cnn.pth'))
         self.model.eval()
 
         self.__strap()
@@ -157,27 +163,77 @@ class EmpathyApp:
             self.realtime = False
             self.mediabox.configure(image='')
 
+    def locate_faces(self, frame):
+        if self.last_roi_array is None:
+            return
+
+        for (x, y, w, h) in self.last_roi_array:
+            cv2.rectangle(frame, (x, y), (x + w, y + h), (255, 105, 65), 2)
+
     def disp_media(self):
+
         if self.cap_obj is not None:
             if self.realtime:
                 flag, frame = self.cap_obj.read()
             else:
                 flag, frame = True, self.cap_obj
+                self.skip_ctr = self.skip_every
 
             if flag:
-                frame, processed_faces = detect_face(frame)
+                if self.skip_ctr == self.skip_every:
+                    min_neigh = None
+                    scale_fac = None
+
+                    # tune parameters before detections
+                    if self.realtime:
+                        min_neigh = 6
+                        scale_fac = 1.1
+                    else:
+                        min_neigh = 4
+                        scale_fac = 1.1
+
+                    roi_coord, frame, processed_faces = detect_face(frame, True, min_neigh, scale_fac)
+                    self.last_roi_array = roi_coord
+
+                self.locate_faces(frame)
+
                 frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
                 # Convert to PIL image and then to ImageTk format (compatibility)
                 img_pil = Image.fromarray(frame)
                 img_pil.thumbnail(self.mat_dim, Image.Resampling.LANCZOS)
                 img_adapted = ImageTk.PhotoImage(img_pil)
 
+                if self.skip_ctr == self.skip_every:
+                    with torch.no_grad():
+                        if len(processed_faces) > 0:
+
+                            image = processed_faces[0]
+                            image = torch.tensor(image, dtype=torch.float32).unsqueeze(0).unsqueeze(0).to('cpu')
+                            output = self.model(image)
+                            proba = F.softmax(output, dim=1)
+
+                            class_labels = ['Anger', 'Disgust', 'Fear', 'Happy', 'Sad', 'Surprise',
+                                            'Neutral']
+
+                            prob_strings = [f'{class_labels[i]}: {proba[0, i].item() * 100:.2f}%' for i in
+                                            range(proba.size(1))]
+
+                            # Join the strings into a single formatted string
+                            result_string = '\n'.join(prob_strings)
+
+                            self.statsbox.config(state=tk.NORMAL)
+                            self.statsbox.delete(1.0, tk.END)  # Clear existing content
+                            self.statsbox.insert(tk.END, result_string)  # Insert new content
+                            self.statsbox.config(state=tk.DISABLED)
+                    self.skip_ctr = 0
                 self.mediabox.image = img_adapted
                 self.mediabox.configure(image=img_adapted)
-
+                self.skip_ctr += 1
                 # Continue updating if video (realtime)
                 if self.realtime:
                     self.rootwnd.after(15, self.disp_media)
+                else:
+                    self.skip_ctr = 0
             else:
                 if self.realtime:
                     self.cap_obj.release()
@@ -185,3 +241,4 @@ class EmpathyApp:
                 self.mediabox.configure(image='')
                 self.uploader.grid(row=10, column=1)
                 self.camera.grid(row=11, column=1)
+

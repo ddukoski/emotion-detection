@@ -1,13 +1,13 @@
 import cv2
 from preprocessing.preprocessing_frames import preprocess
 
-def detect_face(frame):
+def detect_face(frame, fromvid, min_neighb, scale_fac):
     """
     :param frame: A digital image with a potential human face present
     :return: All detected and preprocessed faces, along with a frame with a drawn rectangle along each human face
     """
     MIN_NEIGHBOURS = 9
-    SCALE_FACTOR = 1.25
+    SCALE_FACTOR = 1.1
 
     face_cascade = cv2.CascadeClassifier('preprocessing/haarcascade_frontalface_default.xml')
     # TODO explore skipping frames for less
@@ -24,7 +24,7 @@ def detect_face(frame):
     Find the region of interest (faces), scale_factor has a regular value
     minNeighbours has a higher value for greater confidence level
     """
-    ROI_coordinates = face_cascade.detectMultiScale(frame, scaleFactor=SCALE_FACTOR, minNeighbors=MIN_NEIGHBOURS)
+    ROI_coordinates = face_cascade.detectMultiScale(frame, scaleFactor=scale_fac, minNeighbors=min_neighb)
     """ after finding the coordinates of each face in the frame, we should extract
     separate regions of interest (single faces)
     using the coordinates specified for width and height for a rectangle shape"""
@@ -37,7 +37,6 @@ def detect_face(frame):
         using the coordinates of the top left and lower right corner of the rectangle
         this part is optional but helpful
         """
-        cv2.rectangle(frame, (x, y), (x + w, y + h), (255, 105, 65), 2)
         # using the information about width and height we will extract (crop) the face
         # y : y + h is the height
         # x : x + w is the width
@@ -50,9 +49,9 @@ def detect_face(frame):
         / improvement of the ML/AI part. The function used is applied to the original dataset, the only difference
         is that we've enriched the dataset using augmentation
         """
-        preprocessed_faces.append(preprocess(ROI_resized, from_video=True))
+        preprocessed_faces.append(preprocess(ROI_resized, from_video=fromvid))
 
-    return frame, preprocessed_faces
+    return ROI_coordinates, frame, preprocessed_faces
 
 
 """
