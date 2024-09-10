@@ -1,17 +1,20 @@
 import csv
 
-import cv2
-import numpy as np
 import pandas as pd
 from preprocessing.preprocessing_frames import *
 
 
-def preprocess_dataset(dataset_path):
-    data = pd.read_csv(dataset_path)
-    data.columns = ['emotion', 'image']
-    data['image'] = data['image'].apply(lambda px: np.fromstring(px, sep=' '))
-    data['image'] = data['image'].apply(lambda image: preprocess(image, False))
-    data['image'] = data['image'].apply(lambda arr: ' '.join(map(str, arr.flatten())))
+def preprocess_dataset(ds):
+    if type(ds) is pd.DataFrame:
+        data = ds
+    else:
+        data = pd.read_csv(ds)
+        data['pixels'] = data['pixels'].apply(lambda px: np.fromstring(px, sep=' '))
+
+    data.columns = ['emotion', 'pixels']
+
+    data['pixels'] = data['pixels'].apply(lambda image: preprocess(image, False))
+    data['pixels'] = data['pixels'].apply(lambda arr: ' '.join(map(str, arr.flatten())))
     return data
 
 
@@ -56,8 +59,8 @@ if __name__ == '__main__':
     # preprocessed_train_data = preprocess_dataset('datasets/train.csv')
     # preprocessed_train_data.to_csv('datasets/train.csv', index=False)
     #
-    # preprocessed_private_data = preprocess_dataset('datasets/private_test.csv')
-    # preprocessed_private_data.to_csv('datasets/private_test.csv', index=False)
+    preprocessed_private_data = preprocess_dataset('datasets/private_test.csv')
+    preprocessed_private_data.to_csv('datasets/private_test.csv', index=False)
     #
     # preprocessed_validation_data = preprocess_dataset('datasets/public_test.csv')
     # preprocessed_validation_data.to_csv('datasets/public_test.csv', index=False)

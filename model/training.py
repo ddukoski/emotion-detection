@@ -76,9 +76,9 @@ def evaluate(model, loader, criterion):
 if __name__ == '__main__':
 
     # Path parameters
-    train_csv = "C:\\Users\\david\\PycharmProjects\\emotion-detection\\datasets\\train.csv"
-    test_csv = "C:\\Users\\david\\PycharmProjects\\emotion-detection\\datasets\\private_test.csv"
-    model_save_path = "C:\\Users\\david\\PycharmProjects\\emotion-detection\\cnn.pth"
+    train_csv = "../datasets/train_aug.csv"
+    test_csv = "../datasets/private_test.csv"
+    model_save_path = "../cnn.pth"
 
     # Hyperparameters
     batch_size = 64
