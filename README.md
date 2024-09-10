@@ -1,4 +1,7 @@
 # Welcome.
+
+![eyelogo](https://github.com/user-attachments/assets/d7749b2e-0d8c-48d5-80f1-e21805bef3b1)
+
 ##### Empathy is a small computer vision and deep learning project for the Digital Image Processing course at FCSE. Empathy detects faces (with Haar Cascades) in video and images and describes their emotion using a trained/to-be-trained CNN.
 
 The app comes with a preloaded and trained model.
