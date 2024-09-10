@@ -1,4 +1,31 @@
 import torch.nn as nn
+import torch
+import torch.nn.functional as F
+
+def estimate_emotions(processed_faces, model):
+
+    retval = ''
+
+    if len(processed_faces) > 0:
+        for num, face in enumerate(processed_faces):
+            retval += f'Face {num+1}:\n'
+            with torch.no_grad():
+                image = torch.tensor(face, dtype=torch.float32).unsqueeze(0).unsqueeze(0).to('cpu')  # flattening
+                output = model(image)
+                proba = F.softmax(output, dim=1)
+
+                class_labels = ['Anger', 'Disgust', 'Fear', 'Happy', 'Sad', 'Surprise',
+                                    'Neutral']
+
+                prob_strings = [f'{class_labels[i]}: {proba[0, i].item():.3f}' for i in
+                                    range(proba.size(1))]
+
+                # Join the strings into a single formatted string
+                retval += '\n'.join(prob_strings) + '\n\n'
+
+        return retval
+    else:
+        return ''
 
 
 class EmotionCNN(nn.Module):

@@ -7,9 +7,10 @@ import numpy as np
 from torchvision import transforms
 from model.emotion_net import EmotionCNN
 
+
 class EmotionDataset(Dataset):
     def __init__(self, csv_file, transform=None):
-        self.data = pd.read_csv(csv_file)
+        self.data = pd.read_csv(csv_file, header=0)
         self.transform = transform
 
     def __len__(self):
@@ -75,8 +76,8 @@ def evaluate(model, loader, criterion):
 if __name__ == '__main__':
 
     # Path parameters
-    train_csv = "C:\\Users\\david\\PycharmProjects\\emotion-detection\\datasets\\dummytrain.csv"
-    test_csv = "C:\\Users\\david\\PycharmProjects\\emotion-detection\\datasets\\dummytest.csv"
+    train_csv = "C:\\Users\\david\\PycharmProjects\\emotion-detection\\datasets\\train.csv"
+    test_csv = "C:\\Users\\david\\PycharmProjects\\emotion-detection\\datasets\\private_test.csv"
     model_save_path = "C:\\Users\\david\\PycharmProjects\\emotion-detection\\cnn.pth"
 
     # Hyperparameters
@@ -107,8 +108,13 @@ if __name__ == '__main__':
     optimizer = optim.SGD(model.parameters(), lr=LR)
 
     # Training loop
+
+    import time
+
+    start_time = time.time()
+
     best_acc = 0.0
-    for epoch in range(n_epochs):
+    for epoch in range(3):
         print(f'Epoch {epoch + 1}/{n_epochs}')
 
         train_loss, train_acc = train(model, train_loader, optimizer, criterion)
@@ -122,4 +128,7 @@ if __name__ == '__main__':
             torch.save(model.state_dict(), model_save_path)
             best_acc = test_acc
 
+    end_time = time.time()
     print(f'Highest test accuracy: {best_acc}')
+    print(f'Time spent training: '
+          f'{int((end_time - start_time) // 3600)}:{int((end_time % start_time) // 60)}:{int(end_time % 60)}')
