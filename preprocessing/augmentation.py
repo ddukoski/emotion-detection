@@ -33,8 +33,9 @@ def create_set_from_jpg_dir(directory_path):
 
 if __name__ == '__main__':
     read_pixels = pd.read_csv('../datasets/train.csv')
-    if not os.path.exists('../datasets/orig_images'):
+    if not os.path.exists('../datasets/orig_images') or not os.path.exists('../datasets/aug_images'):
         os.makedirs('../datasets/orig_images')
+        os.makedirs('../datasets/aug_images')
         for index, row in read_pixels.iterrows():
             save_image_from_row(row, index)
 
@@ -54,7 +55,8 @@ if __name__ == '__main__':
         p.sample(1000)
         print('Images are augmented.')
     else:
-        print("Images are probably already augumented")
+        print("Images are probably already augmented, if not, delete both directories: aug_images and orig_images"
+              "if present")
 
     augmented_images_data= '../datasets/orig_images'
     train_set_images_path = '../datasets/aug_images'
