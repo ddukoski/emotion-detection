@@ -54,7 +54,7 @@ def train(model, loader, optimizer, criterion):
     return avg_loss, accuracy
 
 
-def evaluate(model, loader, criterion):
+def evaluate(model, loader, criterion, device=torch.device('cuda' if torch.cuda.is_available() else 'cpu')):
     model.eval()
     total_loss = 0
     correct = 0
@@ -78,12 +78,12 @@ if __name__ == '__main__':
     # Path parameters
     train_csv = "../datasets/train_aug.csv"
     test_csv = "../datasets/private_test.csv"
-    model_save_path = "../cnn.pth"
+    model_save_path = "../cnn_elu_sgd.pth"
 
     # Hyperparameters
     batch_size = 64
     LR = 0.001
-    n_epochs = 25
+    n_epochs = 30
 
     # Device configuration
     device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
@@ -114,7 +114,13 @@ if __name__ == '__main__':
     start_time = time.time()
 
     best_acc = 0.0
-    for epoch in range(3):
+    wait = 0
+    patience = 5
+    overfit_sens = 0.06
+    delta = 0.001
+    prev_state = None
+
+    for epoch in range(30):
         print(f'Epoch {epoch + 1}/{n_epochs}')
 
         train_loss, train_acc = train(model, train_loader, optimizer, criterion)
@@ -123,10 +129,23 @@ if __name__ == '__main__':
         print(f'Train Loss: {train_loss:.4f}, Train Acc: {train_acc:.4f}')
         print(f'Test Loss: {test_loss:.4f}, Test Acc: {test_acc:.4f}')
 
-        # Save the best model based on test accuracy
-        if test_acc > best_acc:
+        if test_acc > best_acc + delta:
+
+            # Stop training model if blatant verfitting
+            if train_acc - test_acc > overfit_sens:
+                print("Early stop.")
+                break
+
+            prev_state = model.state_dict()
             torch.save(model.state_dict(), model_save_path)
             best_acc = test_acc
+            wait = 0
+        else:
+            wait += 1
+
+        if wait == patience:
+            print("Early stop.")
+            break
 
     end_time = time.time()
     print(f'Highest test accuracy: {best_acc}')

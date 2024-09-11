@@ -14,11 +14,10 @@ def estimate_emotions(processed_faces, model):
                 output = model(image)
                 proba = F.softmax(output, dim=1)
 
-                class_labels = ['Anger', 'Disgust', 'Fear', 'Happy', 'Sad', 'Surprise',
-                                    'Neutral']
+                # it is this exact order in the fer2013 dataset
+                class_labels = ['Anger', 'Disgust', 'Fear', 'Happy', 'Sad', 'Surprise', 'Neutral']
 
-                prob_strings = [f'{class_labels[i]}: {proba[0, i].item():.3f}' for i in
-                                    range(proba.size(1))]
+                prob_strings = [f'{class_labels[i]}: {proba[0, i].item():.3f}' for i in range(proba.size(1))]
 
                 # Join the strings into a single formatted string
                 retval += '\n'.join(prob_strings) + '\n\n'
@@ -40,7 +39,7 @@ class EmotionCNN(nn.Module):
         # jama
         self.classifier = nn.Sequential(
             nn.Linear(6 * 6 * 128, 64),
-            nn.ReLU(inplace=True),
+            nn.ELU(inplace=True),
             nn.Dropout(p=0.5),
             nn.Linear(64, num_of_classes)
         )
@@ -72,7 +71,7 @@ class EmotionCNN(nn.Module):
                 layers += [
                     nn.Conv2d(in_channels, x, kernel_size=3, padding=1),
                     nn.BatchNorm2d(x),
-                    nn.ReLU(inplace=True)
+                    nn.ELU(inplace=True)
                 ]
 
                 in_channels = x

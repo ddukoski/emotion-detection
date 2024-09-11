@@ -9,7 +9,6 @@ from model.emotion_net import estimate_emotions
 from preprocessing.face_detection import detect_face
 
 
-
 class EmpathyApp:
     # Singleton instance (only 1 window interface)
     _instance = None
@@ -57,7 +56,7 @@ class EmpathyApp:
         self.fast_validation_photo = self.photo_ext[1]
 
         self.model.load_state_dict(
-            torch.load('C:\\Users\\david\\PycharmProjects\\emotion-detection\\cnn.pth'))
+            torch.load('cnn_elu_adam.pth'))
         self.model.eval()
 
         self.__strap()
@@ -180,7 +179,6 @@ class EmpathyApp:
             cv2.rectangle(frame, (x, y), (x + w, y + h), (40, 300, 65), 2)
             cv2.putText(frame, str(order+1), (x+10, y+40), cv2.FONT_HERSHEY_COMPLEX, 1, (50, 50, 300), 2, cv2.LINE_AA)
 
-
     def disp_media(self):
 
         if self.cap_obj is not None:
@@ -224,7 +222,6 @@ class EmpathyApp:
                     self.statsbox.insert(tk.END, result_string)  # Insert new content
                     self.statsbox.config(state=tk.DISABLED)
 
-
                 self.mediabox.image = img_adapted
                 self.mediabox.configure(image=img_adapted)
                 self.skip_ctr += 1
@@ -240,4 +237,3 @@ class EmpathyApp:
                 self.mediabox.configure(image='')
                 self.uploader.grid(row=10, column=1)
                 self.camera.grid(row=11, column=1)
-
