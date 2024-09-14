@@ -4,11 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4b562d2d-0b6c-4b2b-b2d0-7e3ebdc3b15b" name="Changes" comment="Add final augumented code and relative paths">
+    <list default="true" id="4b562d2d-0b6c-4b2b-b2d0-7e3ebdc3b15b" name="Changes" comment="Add automatic directory creation upon augmenting">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gui/uinterface.py" beforeDir="false" afterPath="$PROJECT_DIR$/gui/uinterface.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataset_formatting.py" beforeDir="false" afterPath="$PROJECT_DIR$/dataset_formatting.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/model/emotion_net.py" beforeDir="false" afterPath="$PROJECT_DIR$/model/emotion_net.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/model/training.py" beforeDir="false" afterPath="$PROJECT_DIR$/model/training.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/preprocessing/augmentation.py" beforeDir="false" afterPath="$PROJECT_DIR$/preprocessing/augmentation.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -39,45 +40,46 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Python.augmentation.executor": "Run",
-    "Python.dataset_formatting.executor": "Run",
-    "Python.emotion_net.executor": "Run",
-    "Python.eval.executor": "Run",
-    "Python.main.executor": "Run",
-    "Python.training.executor": "Run",
-    "Python.uinterface.executor": "Run",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "git-widget-placeholder": "main",
-    "last_opened_file_path": "C:/Users/david/PycharmProjects/emotion-detection/preprocessing",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Python.augmentation.executor&quot;: &quot;Run&quot;,
+    &quot;Python.dataset_formatting.executor&quot;: &quot;Run&quot;,
+    &quot;Python.emotion_net.executor&quot;: &quot;Run&quot;,
+    &quot;Python.eval.executor&quot;: &quot;Run&quot;,
+    &quot;Python.main.executor&quot;: &quot;Run&quot;,
+    &quot;Python.training.executor&quot;: &quot;Run&quot;,
+    &quot;Python.uinterface.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/david/PycharmProjects/emotion-detection/dist&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;editor.preferences.fonts.default&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\david\PycharmProjects\emotion-detection\dist" />
+      <recent name="C:\Users\david\PycharmProjects\emotion-detection\gui" />
       <recent name="C:\Users\david\PycharmProjects\emotion-detection\preprocessing" />
       <recent name="C:\Users\janaa\PycharmProjects\emotion-detection" />
       <recent name="C:\Users\janaa\PycharmProjects\emotion-detection\preprocessing" />
-      <recent name="C:\Users\david\PycharmProjects\emotion-detection\datasets" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\david\PycharmProjects\emotion-detection\preprocessing" />
       <recent name="C:\Users\david\PycharmProjects\emotion-detection\datasets" />
+      <recent name="C:\Users\david\PycharmProjects\emotion-detection\preprocessing" />
       <recent name="C:\Users\david\PycharmProjects\emotion-detection\\" />
       <recent name="C:\Users\david\PycharmProjects\emotion-detection\gui\graphics" />
       <recent name="C:\Users\david\PycharmProjects\emotion-detection\gui" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.main">
+  <component name="RunManager" selected="Python.eval">
     <configuration name="augmentation" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="emotion-detection" />
       <option name="ENV_FILES" value="" />
@@ -194,18 +196,18 @@
       <method v="2" />
     </configuration>
     <list>
-      <item itemvalue="Python.eval" />
       <item itemvalue="Python.augmentation" />
-      <item itemvalue="Python.training" />
       <item itemvalue="Python.dataset_formatting" />
+      <item itemvalue="Python.eval" />
       <item itemvalue="Python.main" />
+      <item itemvalue="Python.training" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.main" />
         <item itemvalue="Python.eval" />
         <item itemvalue="Python.training" />
         <item itemvalue="Python.augmentation" />
+        <item itemvalue="Python.main" />
         <item itemvalue="Python.dataset_formatting" />
       </list>
     </recent_temporary>
@@ -244,7 +246,14 @@
       <workItem from="1725955965592" duration="3184000" />
       <workItem from="1725975379054" duration="7410000" />
       <workItem from="1725987651934" duration="8077000" />
-      <workItem from="1726043829581" duration="827000" />
+      <workItem from="1726043829581" duration="2317000" />
+      <workItem from="1726064176265" duration="8135000" />
+      <workItem from="1726131070320" duration="951000" />
+      <workItem from="1726160249066" duration="2643000" />
+      <workItem from="1726239259796" duration="4696000" />
+      <workItem from="1726311754354" duration="3000" />
+      <workItem from="1726311816804" duration="6834000" />
+      <workItem from="1726319297156" duration="1045000" />
     </task>
     <task id="LOCAL-00001" summary="Add processed csv datasets">
       <option name="closed" value="true" />
@@ -366,7 +375,23 @@
       <option name="project" value="LOCAL" />
       <updated>1725981289185</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="Add adjusted code and baseline accuracy trained model (cnn_elu_adam.pth)">
+      <option name="closed" value="true" />
+      <created>1726045242772</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1726045242772</updated>
+    </task>
+    <task id="LOCAL-00017" summary="Add automatic directory creation upon augmenting">
+      <option name="closed" value="true" />
+      <created>1726045516189</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1726045516189</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -396,26 +421,17 @@
     <MESSAGE value="Add parameter tuning and better face detection for pictures" />
     <MESSAGE value="Add training updates and parameter optimization" />
     <MESSAGE value="Add final augumented code and relative paths" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add final augumented code and relative paths" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/gui/uinterface.py</url>
-          <line>191</line>
-          <option name="timeStamp" value="2" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
+    <MESSAGE value="Add adjusted code and baseline accuracy trained model (cnn_elu_adam.pth)" />
+    <MESSAGE value="Add automatic directory creation upon augmenting" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add automatic directory creation upon augmenting" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/emotion_detection$eval.coverage" NAME="eval Coverage Results" MODIFIED="1726044641880" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/emotion_detection$eval.coverage" NAME="eval Coverage Results" MODIFIED="1726320035656" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/emotion_detection$emotion_net.coverage" NAME="emotion_net Coverage Results" MODIFIED="1725894321925" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/model" />
-    <SUITE FILE_PATH="coverage/emotion_detection$training.coverage" NAME="training Coverage Results" MODIFIED="1726011486493" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/model" />
-    <SUITE FILE_PATH="coverage/emotion_detection$main.coverage" NAME="main Coverage Results" MODIFIED="1726044331168" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/emotion_detection$training.coverage" NAME="training Coverage Results" MODIFIED="1726316750213" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/model" />
+    <SUITE FILE_PATH="coverage/emotion_detection$main.coverage" NAME="main Coverage Results" MODIFIED="1726162456471" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/emotion_detection$dataset_formatting.coverage" NAME="dataset_formatting Coverage Results" MODIFIED="1725979943648" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/emotion_detection$augmentation.coverage" NAME="augmentation Coverage Results" MODIFIED="1725980784226" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/datasets" />
+    <SUITE FILE_PATH="coverage/emotion_detection$augmentation.coverage" NAME="augmentation Coverage Results" MODIFIED="1726316612992" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/datasets" />
     <SUITE FILE_PATH="coverage/emotion_detection$uinterface.coverage" NAME="uinterface Coverage Results" MODIFIED="1725895051356" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/gui" />
   </component>
 </project>

@@ -1,10 +1,14 @@
+import os
+import sys
+
 import Augmentor
+import cv2
 import numpy as np
 import pandas as pd
-import cv2
-from dataset_formatting import preprocess_dataset
 from PIL import Image
-import os
+
+from dataset_formatting import preprocess_dataset
+
 
 def save_image_from_row(row, index):
     emotion = row['emotion']
@@ -30,16 +34,18 @@ def create_set_from_jpg_dir(directory_path):
     return images
 
 
-
 if __name__ == '__main__':
     read_pixels = pd.read_csv('../datasets/train.csv')
     if not os.path.exists('../datasets/orig_images') or not os.path.exists('../datasets/aug_images'):
-        os.makedirs('../datasets/orig_images')
-        os.makedirs('../datasets/aug_images')
+        if not os.path.exists('../datasets/orig_images'):
+            os.makedirs('../datasets/orig_images')
+        if not os.path.exists('../datasets/aug_images'):
+            os.makedirs('../datasets/aug_images')
+
         for index, row in read_pixels.iterrows():
             save_image_from_row(row, index)
 
-        p = Augmentor.Pipeline(source_directory='orig_images', output_directory='orig_images')
+        p = Augmentor.Pipeline(source_directory='orig_images', output_directory='aug_images')
         p.rotate(probability=0.2, max_left_rotation=25, max_right_rotation=25)
         p.skew(probability=0.2, magnitude=0.2)
         p.zoom_random(probability=0.3, percentage_area=0.8)
@@ -52,17 +58,17 @@ if __name__ == '__main__':
             method="in"
         )
         p.random_erasing(probability=0.1, rectangle_area=0.2)
-        p.sample(1000)
-        print('Images are augmented.')
+        p.sample(10000)
+        print('Images have sucessfully been augumented.', file=sys.stderr)
     else:
         print("Images are probably already augmented, if not, delete both directories: aug_images and orig_images"
-              "if present")
+              " if present", file=sys.stderr)
 
-    augmented_images_data= '../datasets/orig_images'
-    train_set_images_path = '../datasets/aug_images'
-    train_dataset_csv_path = '../datasets/train_aug.csv'
+    augmented_images_path = '../datasets/aug_images'
+    train_set_images_path = '../datasets/orig_images'
+    train_dataset_csv_path = '../datasets/train.csv'
 
-    res = create_set_from_jpg_dir(augmented_images_data) + create_set_from_jpg_dir(train_set_images_path)
+    res = create_set_from_jpg_dir(augmented_images_path) + create_set_from_jpg_dir(train_set_images_path)
     df = pd.DataFrame(res, columns=['emotion', 'pixels'])
     df = preprocess_dataset(df)
     df.to_csv(path_or_buf=train_dataset_csv_path, index=False)

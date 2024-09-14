@@ -78,7 +78,7 @@ if __name__ == '__main__':
     # Path parameters
     train_csv = "../datasets/train_aug.csv"
     test_csv = "../datasets/private_test.csv"
-    model_save_path = "../cnn_elu_sgd.pth"
+    model_save_path = "../cnn_elu_adam.pth"
 
     # Hyperparameters
     batch_size = 64
@@ -105,7 +105,7 @@ if __name__ == '__main__':
     """
     model = EmotionCNN(num_of_channels=1, num_of_classes=7).to(device)
     criterion = nn.CrossEntropyLoss()
-    optimizer = optim.SGD(model.parameters(), lr=LR)
+    optimizer = optim.Adam(model.parameters(), lr=LR, weight_decay=1e-5)
 
     # Training loop
 
@@ -116,11 +116,11 @@ if __name__ == '__main__':
     best_acc = 0.0
     wait = 0
     patience = 5
-    overfit_sens = 0.06
+    overfit_sens = 0.065
     delta = 0.001
     prev_state = None
 
-    for epoch in range(30):
+    for epoch in range(n_epochs):
         print(f'Epoch {epoch + 1}/{n_epochs}')
 
         train_loss, train_acc = train(model, train_loader, optimizer, criterion)
@@ -131,8 +131,9 @@ if __name__ == '__main__':
 
         if test_acc > best_acc + delta:
 
-            # Stop training model if blatant verfitting
+            # Stop training model if blatant overfitting
             if train_acc - test_acc > overfit_sens:
+                torch.save(prev_state, model_save_path)
                 print("Early stop.")
                 break
 
@@ -148,6 +149,12 @@ if __name__ == '__main__':
             break
 
     end_time = time.time()
+
+    hours = end_time // 3600
+    end_time -= hours * 3600
+    minutes = end_time // 60
+    end_time -= minutes * 60
+
     print(f'Highest test accuracy: {best_acc}')
     print(f'Time spent training: '
-          f'{int((end_time - start_time) // 3600)}:{int((end_time % start_time) // 60)}:{int(end_time % 60)}')
+          f'{hours}:{minutes}:{end_time}')
