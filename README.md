@@ -6,6 +6,9 @@
 
 The app comes with a preloaded and trained model.
 
+Required packages:
+NumPy (numpy), PyTorch (torch), Keras preprocessing library (keras-preprocessing), OpenCV (opencv-python) for Python, tkinter, Pillow (pillow) and Augmentor.
+
 If you would like to train the model from scratch, please download the FER2013 dataset from https://www.kaggle.com/datasets/deadskull7/fer2013 and put it in a 'datasets' directory, then do the following:
   1. Run the preprocessing/dataset_formatting.py script (if you are using a different dataset than FER2013, make sure it matches FER2013's column and emotion number format)
   2. Run the preprocessing/augumentation.py stript
