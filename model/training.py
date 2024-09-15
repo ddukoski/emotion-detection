@@ -116,8 +116,8 @@ if __name__ == '__main__':
     best_acc = 0.0
     wait = 0
     patience = 5
-    overfit_sens = 0.065
-    delta = 0.001
+    overfit_sens = 0.05
+    delta = 0.01
     prev_state = None
 
     for epoch in range(n_epochs):
@@ -145,6 +145,7 @@ if __name__ == '__main__':
             wait += 1
 
         if wait == patience:
+            torch.save(prev_state, model_save_path)
             print("Early stop.")
             break
 

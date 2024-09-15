@@ -23,7 +23,7 @@ def save_image_from_row(row, index):
 
 def create_set_from_jpg_dir(directory_path):
 
-    images = []
+    images = list()
 
     for image in os.listdir(directory_path):
         splitstr = image.split('_')
@@ -66,9 +66,10 @@ if __name__ == '__main__':
 
     augmented_images_path = '../datasets/aug_images'
     train_set_images_path = '../datasets/orig_images'
-    train_dataset_csv_path = '../datasets/train.csv'
+    train_dataset_csv_path = '../datasets/train_augmented.csv'
 
     res = create_set_from_jpg_dir(augmented_images_path) + create_set_from_jpg_dir(train_set_images_path)
     df = pd.DataFrame(res, columns=['emotion', 'pixels'])
     df = preprocess_dataset(df)
     df.to_csv(path_or_buf=train_dataset_csv_path, index=False)
+
